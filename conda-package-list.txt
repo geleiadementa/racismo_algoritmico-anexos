@@ -27,10 +27,16 @@ jupyter_client=7.3.5=pyhd8ed1ab_0
 jupyter_core=4.11.1=py310hff52083_0
 jupyterlab_pygments=0.2.2=pyhd8ed1ab_0
 ld_impl_linux-64=2.36.1=hea4e1c9_2
+libblas=3.9.0=16_linux64_openblas
+libcblas=3.9.0=16_linux64_openblas
 libffi=3.4.2=h7f98852_5
 libgcc-ng=12.1.0=h8d9b700_16
+libgfortran-ng=12.1.0=h69a702a_16
+libgfortran5=12.1.0=hdcd56e2_16
 libgomp=12.1.0=h8d9b700_16
+liblapack=3.9.0=16_linux64_openblas
 libnsl=2.0.0=h7f98852_0
+libopenblas=0.3.21=pthreads_h78a6416_3
 libsodium=1.0.18=h36c2ea0_1
 libsqlite=3.39.4=h753d276_0
 libstdcxx-ng=12.1.0=ha89aaad_16
@@ -46,8 +52,10 @@ nbconvert-pandoc=7.1.0=pyhd8ed1ab_0
 nbformat=5.6.1=pyhd8ed1ab_0
 ncurses=6.3=h27087fc_1
 nest-asyncio=1.5.6=pyhd8ed1ab_0
+numpy=1.23.3=py310h53a5b5f_0
 openssl=3.0.5=h166bdaf_2
 packaging=21.3=pyhd8ed1ab_0
+pandas=1.5.0=py310h769672d_0
 pandoc=2.19.2=ha770c72_0
 pandocfilters=1.5.0=pyhd8ed1ab_0
 parso=0.8.3=pyhd8ed1ab_0
@@ -65,6 +73,7 @@ python=3.10.6=ha86cf86_0_cpython
 python-dateutil=2.8.2=pyhd8ed1ab_0
 python-fastjsonschema=2.16.2=pyhd8ed1ab_0
 python_abi=3.10=2_cp310
+pytz=2022.4=pyhd8ed1ab_0
 pyzmq=24.0.1=py310h330234f_0
 readline=8.1.2=h0f457ee_0
 setuptools=65.4.1=pyhd8ed1ab_0
