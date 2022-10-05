@@ -30,7 +30,7 @@ if __name__ == '__main__':
         # write header
         dataset_writer.writerow(['id', 'filepath', 'ethnicity'])
 
-        for filepath in tqdm(files):
+        for filepath in tqdm(files, ncols=80, unit='files', mininterval=0.5):
             match = regex.search(filepath)
             _id = match.group()
             ethnicity = _id2ethnicity[_id]
