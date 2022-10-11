@@ -70,3 +70,9 @@ make_output_deepface:
     @echo "calculando o hash:"
     @echo {{ sha256_file(dataset_resultado) }} {{ file_name(dataset_resultado) }} | tee {{hash_dir}}/{{ file_stem(dataset_resultado)}}.txt
     @echo {{ sha256_file(output_deepface) }} {{ file_name(output_deepface) }} | tee {{hash_dir}}/{{ file_stem(output_deepface)}}.txt
+
+run:
+    @just create_dirs
+    @just make_dataset_base
+    @just make_datasets_samples
+    @just make_output_deepface
