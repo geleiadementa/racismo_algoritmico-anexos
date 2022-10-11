@@ -1,5 +1,6 @@
 import os
 import json
+import numpy as np
 import pandas as pd
 from deepface import DeepFace
 from typing import Union
@@ -23,6 +24,11 @@ def make_columns(js: dict) -> dict:
     for instance in js.keys():
         for category in js[instance].keys():
             if type(js[instance][category]) is dict:
+                add_item(
+                    f'var_{category}',
+                    np.var(list(js[instance][category].values())),
+                    new_columns
+                )
                 for subcategory in js[instance][category]:
                     act_key = f'{category}-{subcategory}'
                     add_item(
