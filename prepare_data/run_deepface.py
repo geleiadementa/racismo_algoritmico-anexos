@@ -17,6 +17,28 @@ def add_item(col: str, item: Union[str, float, int], repo: dict):
         repo[col] = [item]
 
 
+def make_columns(js: dict) -> dict:
+    new_columns = {}
+
+    for instance in js.keys():
+        for category in js[instance].keys():
+            if type(js[instance][category]) is dict:
+                for subcategory in js[instance][category]:
+                    act_key = f'{category}-{subcategory}'
+                    add_item(
+                        act_key,
+                        js[instance][category][subcategory],
+                        new_columns
+                    )
+            else:
+                add_item(
+                    category,
+                    js[instance][category],
+                    new_columns
+                )
+
+    return new_columns
+
 if __name__ == '__main__':
 
     df = pd.read_csv(samples, delimiter='\t')
@@ -36,24 +58,7 @@ if __name__ == '__main__':
         )
         print('ok')
 
-    new_columns = {}
-
-    for instance in out.keys():
-        for category in out[instance].keys():
-            if type(out[instance][category]) is dict:
-                for subcategory in out[instance][category]:
-                    act_key = f'{category}-{subcategory}'
-                    add_item(
-                        act_key,
-                        out[instance][category][subcategory],
-                        new_columns
-                    )
-            else:
-                add_item(
-                    category,
-                    out[instance][category],
-                    new_columns
-                )
+    new_columns = make_columns(out)
 
     for col in new_columns.keys():
         df[col] = new_columns[col]
