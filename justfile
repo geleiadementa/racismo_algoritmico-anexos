@@ -7,10 +7,12 @@ labels :=
 dataset_dir := absolute_path("datasets")
 dataset_base := join(dataset_dir, "base.csv")
 dataset_sample := join(dataset_dir, "sample.csv")
+dataset_resultado := join(dataset_dir, "deepface_resultado.csv")
 #-------------------------------------------------------------------------------
 n_amostras := "100"
 resultados := "resultados.csv"
 output_dir := absolute_path("output")
+output_deepface := join(output_dir, "deepface.json")
 #-------------------------------------------------------------------------------
 seed := "62733" # gerado por: od -N2 -vAn -d /dev/random
 hash_dir := absolute_path("hash")
@@ -18,10 +20,10 @@ hash_dir := absolute_path("hash")
 _scripts_dir := absolute_path("prepare_data")
 make_dataset_base := join(_scripts_dir, "make_base.py")
 make_dataset_groups := join(_scripts_dir, "make_samples.py")
-models := "process/deepface.py"
+make_output_deepface := join(_scripts_dir, "run_deepface.py")
 #-------------------------------------------------------------------------------
-_conda := 
-python_env := "racismo-algoritmico"
+_conda := "/home/lincoln/.miniconda"
+python_env := "raa"
 python_bin := _conda / "envs" / python_env / "bin/python"
 conda_packages := "conda-package-list.txt"
 #-------------------------------------------------------------------------------
@@ -61,3 +63,10 @@ make_datasets_samples:
     {{ python_bin }} {{ absolute_path(make_dataset_groups) }}
     @echo "calculando o hash:"
     @echo {{sha256_file(dataset_sample)}} {{file_name(dataset_sample)}} | tee {{hash_dir}}/{{file_stem(dataset_sample)}}.txt
+
+make_output_deepface:
+    @echo "aplicando o deepface nas amostras:"
+    {{ python_bin }} {{ absolute_path(make_output_deepface) }}
+    @echo "calculando o hash:"
+    @echo {{ sha256_file(dataset_resultado) }} {{ file_name(dataset_resultado) }} | tee {{hash_dir}}/{{ file_stem(dataset_resultado)}}.txt
+    @echo {{ sha256_file(output_deepface) }} {{ file_name(output_deepface) }} | tee {{hash_dir}}/{{ file_stem(output_deepface)}}.txt
