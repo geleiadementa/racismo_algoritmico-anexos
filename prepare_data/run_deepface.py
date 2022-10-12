@@ -26,7 +26,7 @@ def make_columns(js: dict) -> dict:
             if type(js[instance][category]) is dict:
                 add_item(
                     f'var_{category}',
-                    np.var(list(js[instance][category].values())),
+                    np.var(list(js[instance][category].values()), ddof=1),
                     new_columns
                 )
                 for subcategory in js[instance][category]:
