@@ -22,6 +22,9 @@ make_dataset_base := join(_scripts_dir, "make_base.py")
 make_dataset_groups := join(_scripts_dir, "make_samples.py")
 make_output_deepface := join(_scripts_dir, "run_deepface.py")
 #-------------------------------------------------------------------------------
+analyze_path := absolute_path("analyze")
+gen_cards := join(analyze_path, 'result_cards.py')
+#-------------------------------------------------------------------------------
 _conda := "/home/lincoln/.miniconda"
 python_env := "raa"
 python_bin := _conda / "envs" / python_env / "bin/python"
@@ -71,8 +74,13 @@ make_output_deepface:
     @echo {{ sha256_file(dataset_resultado) }} {{ file_name(dataset_resultado) }} | tee {{hash_dir}}/{{ file_stem(dataset_resultado)}}.txt
     @echo {{ sha256_file(output_deepface) }} {{ file_name(output_deepface) }} | tee {{hash_dir}}/{{ file_stem(output_deepface)}}.txt
 
+gen_image_cards:
+    @echo "gerando gráficos de cada imagem"
+    {{ python_bin }} {{ absolute_path(gen_cards) }}
+
 run:
     @just create_dirs
     @just make_dataset_base
     @just make_datasets_samples
     @just make_output_deepface
+    @just gen_image_cards
