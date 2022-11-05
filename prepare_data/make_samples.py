@@ -8,7 +8,7 @@ dataset_sample = getenv('dataset_sample')
 
 (
     pd.read_csv(dataset_base_path, delimiter="\t")
-    .groupby('ethnicity')
+    .groupby(['ethnicity', 'gender'])
     .sample(n_samples, random_state=seed)
     .to_csv(dataset_sample, sep="\t", index=False)
 )
