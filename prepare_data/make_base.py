@@ -14,10 +14,10 @@ regex = re.compile(r"(n\d{6})")
 
 # according to VMER_dataset/README.txt
 labels_names = {
-    1: 'African American',
-    2: 'East Asian',
-    3: 'Caucasian Latin',
-    4: 'Asian Indian'
+    '1': 'African American',
+    '2': 'East Asian',
+    '3': 'Caucasian Latin',
+    '4': 'Asian Indian'
 }
 
 
@@ -61,7 +61,7 @@ if __name__ == "__main__":
             match = regex.search(filepath)
             _id = match.group()
             ethnicity = id2ethnicity[_id]
-            ethnicity_name = labels_names[ethnicityt]
+            ethnicity_name = labels_names[ethnicity]
             gender = id2identity[_id]
             name = id2name[_id]
 
