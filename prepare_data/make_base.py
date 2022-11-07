@@ -23,14 +23,18 @@ def make_index_dict(content: iter, id_col: str, target: str) -> dict:
 
 if __name__ == "__main__":
 
+    pbar = tqdm(total=3, unit='step', desc='read data...')
     with open(labels_file) as f0:
         labels = xmltodict.parse(f0.read())["xml"]["subject"]
         id2ethnicity = make_index_dict(labels, "id", "ethnicity")
+        pbar.update(1)
 
     with open(identity_meta, newline="") as f1:
         identity_dict = csv.DictReader(f1, skipinitialspace=True)
         id2identity = make_index_dict(identity_dict, "Class_ID", "Gender")
+        pbar.update(1)
         id2name = make_index_dict(identity_dict, "ClassID", "Name")
+        pbar.update(1)
 
     files = glob(raw_images_path + "/*/*.jpg")
 
