@@ -30,11 +30,12 @@ if __name__ == "__main__":
         pbar.update(1)
 
     with open(identity_meta, newline="") as f1:
-        identity_dict = csv.DictReader(f1, skipinitialspace=True)
+        identity_dict = list(csv.DictReader(f1, skipinitialspace=True))
         id2identity = make_index_dict(identity_dict, "Class_ID", "Gender")
         pbar.update(1)
         id2name = make_index_dict(identity_dict, "Class_ID", "Name")
         pbar.update(1)
+        del identity_dict
 
     files = glob(raw_images_path + "/*/*.jpg")
 
