@@ -30,18 +30,20 @@ if __name__ == "__main__":
     with open(identity_meta, newline="") as f1:
         identity_dict = csv.DictReader(f1, skipinitialspace=True)
         id2identity = make_index_dict(identity_dict, "Class_ID", "Gender")
+        id2name = make_index_dict(identity_dict, "ClassID", "Name")
 
     files = glob(raw_images_path + "/*/*.jpg")
 
     with open(dataset_output, "w", newline="") as f:
         dataset_writer = csv.writer(f, delimiter="\t")
         # write header
-        dataset_writer.writerow(["id", "filepath", "ethnicity", "gender"])
+        dataset_writer.writerow(["id", "name", "filepath", "ethnicity", "gender"])
 
         for filepath in tqdm(files, ncols=80, unit="files", mininterval=0.5):
             match = regex.search(filepath)
             _id = match.group()
             ethnicity = id2ethnicity[_id]
             gender = id2identity[_id]
+            name = id2name2[_id]
 
-            dataset_writer.writerow([_id, filepath, ethnicity, gender])
+            dataset_writer.writerow([_id, name, filepath, ethnicity, gender])
