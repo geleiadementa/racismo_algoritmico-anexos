@@ -33,7 +33,7 @@ if __name__ == "__main__":
         identity_dict = csv.DictReader(f1, skipinitialspace=True)
         id2identity = make_index_dict(identity_dict, "Class_ID", "Gender")
         pbar.update(1)
-        id2name = make_index_dict(identity_dict, "ClassID", "Name")
+        id2name = make_index_dict(identity_dict, "Class_ID", "Name")
         pbar.update(1)
 
     files = glob(raw_images_path + "/*/*.jpg")
@@ -43,11 +43,14 @@ if __name__ == "__main__":
         # write header
         dataset_writer.writerow(["id", "name", "filepath", "ethnicity", "gender"])
 
-        for filepath in tqdm(files, ncols=80, unit="files", mininterval=0.5):
+        for filepath in tqdm(
+            files, ncols=80, unit="files", mininterval=0.5,
+            desc='make base dataset'
+        ):
             match = regex.search(filepath)
             _id = match.group()
             ethnicity = id2ethnicity[_id]
             gender = id2identity[_id]
-            name = id2name2[_id]
+            name = id2name[_id]
 
             dataset_writer.writerow([_id, name, filepath, ethnicity, gender])
