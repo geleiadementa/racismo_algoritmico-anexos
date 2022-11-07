@@ -12,6 +12,14 @@ dataset_output = getenv("dataset_base")
 
 regex = re.compile(r"(n\d{6})")
 
+# according to VMER_dataset/README.txt
+labels_names = {
+    1: 'African American',
+    2: 'East Asian',
+    3: 'Caucasian Latin',
+    4: 'Asian Indian'
+}
+
 
 def make_index_dict(content: iter, id_col: str, target: str) -> dict:
     _t = {}
@@ -42,7 +50,9 @@ if __name__ == "__main__":
     with open(dataset_output, "w", newline="") as f:
         dataset_writer = csv.writer(f, delimiter="\t")
         # write header
-        dataset_writer.writerow(["id", "name", "filepath", "ethnicity", "gender"])
+        dataset_writer.writerow([
+            "id", "name", "filepath", "ethnicity", "ethnicity_name", "gender"
+        ])
 
         for filepath in tqdm(
             files, ncols=80, unit="files", mininterval=0.5,
@@ -51,7 +61,10 @@ if __name__ == "__main__":
             match = regex.search(filepath)
             _id = match.group()
             ethnicity = id2ethnicity[_id]
+            ethnicity_name = labels_names[ethnicityt]
             gender = id2identity[_id]
             name = id2name[_id]
 
-            dataset_writer.writerow([_id, name, filepath, ethnicity, gender])
+            dataset_writer.writerow([
+                _id, name, filepath, ethnicity, ethnicity_name, gender
+            ])
