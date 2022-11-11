@@ -1,9 +1,9 @@
 set export := true
 
 #-------------------------------------------------------------------------------
-raw_images := "/home/lincoln/Files/Downloads/datasets/VGG-Face2/data/test"
-labels := "/home/lincoln/Files/Downloads/datasets/Ethnicity_Recognition_Dataset/VMER_dataset/finalTest.xml"
-identity_meta := "/home/lincoln/Files/Downloads/datasets/VGG-Face2/meta/identity_meta.csv"
+raw_images := 
+labels := 
+identity_meta := 
 #-------------------------------------------------------------------------------
 dataset_dir := absolute_path("datasets")
 dataset_base := join(dataset_dir, "base.csv")
@@ -11,7 +11,6 @@ dataset_sample := join(dataset_dir, "sample.csv")
 dataset_resultado := join(dataset_dir, "deepface_resultado.csv")
 #-------------------------------------------------------------------------------
 n_amostras := "10"
-n_imgs := "5"
 resultados := "resultados.csv"
 output_dir := absolute_path("output")
 output_deepface := join(output_dir, "deepface.json")
