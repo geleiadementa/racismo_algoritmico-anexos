@@ -11,6 +11,7 @@ dataset_sample := join(dataset_dir, "sample.csv")
 dataset_resultado := join(dataset_dir, "deepface_resultado.csv")
 #-------------------------------------------------------------------------------
 n_amostras := "10"
+n_imgs := "5"
 resultados := "resultados.csv"
 output_dir := absolute_path("output")
 output_deepface := join(output_dir, "deepface.json")
