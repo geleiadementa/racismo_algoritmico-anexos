@@ -3,6 +3,7 @@ from os import getenv
 
 dataset_base_path = getenv("dataset_base")
 n_samples = int(getenv("n_amostras"))
+n_imgs = int(getenv("n_imgs"))
 seed = int(getenv("seed"))
 dataset_sample = getenv("dataset_sample")
 
@@ -19,7 +20,7 @@ mask = pl.all().exclude("id")
 (
     df.filter(pl.col("id").is_in(ids))
     .groupby(pl.col("id"))
-    .agg(mask.shuffle(seed=seed).head(n=n_samples))
+    .agg(mask.shuffle(seed=seed).head(n=n_imgs))
     .explode(mask)
     .write_csv(dataset_sample, sep="\t")
 )
