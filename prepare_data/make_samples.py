@@ -11,8 +11,7 @@ df = pl.read_csv(dataset_base_path, sep="\t")
 ids = (
     df.groupby(["ethnicity", "gender"])
     .agg([pl.col("id").unique().shuffle(seed=seed).head(n=n_samples)])
-    .explode(pl.col("id"))
-    .sort(["ethnicity", "gender"])["id"]
+    .explode(pl.col("id"))["id"]
 )
 
 mask = pl.all().exclude("id")
