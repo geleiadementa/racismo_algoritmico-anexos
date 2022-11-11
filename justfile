@@ -64,7 +64,7 @@ make_dataset_base:
     @echo "calculando o hash:"
     @echo {{sha256_file(dataset_base)}} {{file_name(dataset_base)}} | tee {{hash_dir}}/{{file_stem(dataset_base)}}.txt
 
-make_datasets_samples:
+make_dataset_sample:
     @echo "gerando o dataset com amostragens:"
     {{ python_bin }} {{ absolute_path(make_dataset_groups) }}
     @echo "calculando o hash:"
