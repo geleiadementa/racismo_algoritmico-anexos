@@ -10,7 +10,7 @@ df = pl.read_csv(dataset_base_path, sep="\t")
 
 ids = (
     df.groupby(["ethnicity", "gender"])
-    .agg([pl.col("id").unique().shuffle().head(n=n_samples)])
+    .agg([pl.col("id").unique().shuffle(seed=seed).head(n=n_samples)])
     .explode(pl.col("id"))
     .sort(["ethnicity", "gender"])["id"]
 )
@@ -20,7 +20,7 @@ mask = pl.all().exclude("id")
 (
     df.filter(pl.col("id").is_in(ids))
     .groupby(pl.col("id"))
-    .agg(mask.shuffle().head(n=n_samples))
+    .agg(mask.shuffle(seed=seed).head(n=n_samples))
     .explode(mask)
     .write_csv(dataset_sample, sep="\t")
 )
