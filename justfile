@@ -3,13 +3,14 @@ set export := true
 #-------------------------------------------------------------------------------
 raw_images := 
 labels := 
+identity_meta := 
 #-------------------------------------------------------------------------------
 dataset_dir := absolute_path("datasets")
 dataset_base := join(dataset_dir, "base.csv")
 dataset_sample := join(dataset_dir, "sample.csv")
 dataset_resultado := join(dataset_dir, "deepface_resultado.csv")
 #-------------------------------------------------------------------------------
-n_amostras := "100"
+n_amostras := "10"
 resultados := "resultados.csv"
 output_dir := absolute_path("output")
 output_deepface := join(output_dir, "deepface.json")
@@ -42,6 +43,7 @@ install_deps:
     if [ -x {{ _conda }}/bin/conda ]; then
         {{ _conda }}/bin/activate
         conda create -n {{ python_env }} --file {{ conda_packages }}
+        pip install polars tf-explain
     else
         echo "instale o conda ou o miniconda: https://docs.conda.io/en/latest/miniconda.html"
     fi
