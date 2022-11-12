@@ -68,6 +68,9 @@ if __name__ == '__main__':
     new_columns = make_columns(out)
 
     for col in new_columns.keys():
-        df[col] = new_columns[col]
+        if col == 'gender':
+            df[col + '_pred'] = new_columns[col]
+        else:
+            df[col] = new_columns[col]
 
     df.to_csv(resultados, sep='\t', index=False)
