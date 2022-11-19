@@ -40,6 +40,7 @@ if __name__ == "__main__":
     with open(identity_meta, newline="") as f1:
         identity_dict = list(csv.DictReader(f1, skipinitialspace=True))
         id2identity = make_index_dict(identity_dict, "Class_ID", "Gender")
+        id2identity['n001710'] = "m"
         pbar.update(1)
         id2name = make_index_dict(identity_dict, "Class_ID", "Name")
         pbar.update(1)
